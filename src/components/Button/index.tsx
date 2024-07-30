@@ -33,8 +33,8 @@ export function Button({
   if (variant === 'info')
     return (
       <button
-        className={`bg-primary-800 rounded-[50px] h-12 flex justify-center items-center w-full text-xl font-bold text-white
-                hover:bg-primary-500 border-2 border-secondary-500 max-w-[630px] ${customClass}`}
+        className={`bg-primary-700 h-16 flex justify-center items-center w-full text-xl font-bold text-white
+                hover:bg-primary-500 rounded ${customClass}`}
         {...rest}
       >
         {label}
@@ -43,7 +43,7 @@ export function Button({
   if (variant === 'warning')
     return (
       <button
-        className={`bg-primary-800 size-12 flex items-center text-8xl font-bold hover:bg-primary-500 border border-transparent hover:border-secondary-500 justify-center px-3 py-1.5 leading-6 text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 ${customClass}`}
+        className={`bg-primary-700 size-12 flex items-center text-8xl font-bold hover:bg-primary-500 border-transparent justify-center px-3 py-1.5 leading-6 text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 ${customClass}`}
         {...rest}
       >
         {label}

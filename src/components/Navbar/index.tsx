@@ -10,13 +10,14 @@ export default function Navbar() {
     setOpen((prevState) => !prevState)
   }
   return (
-    <nav className="bg-primary-700 flex flex-col justify-between">
+    <nav className="flex bg-primary-700 shadow flex-col justify-between shadow">
       <div className="w-full flex flex-wrap items-center justify-between p-4">
         <div className="flex items-center space-x-3 rtl:space-x-reverse">
           <Image
             src={Logo}
-            className="h-14 w-24"
+            className="h-14 w-auto"
             alt="Bilhete Milionário Logo"
+            priority
           />
           <span className="self-center text-white text-xl font-semibold whitespace-nowrap dark:text-white">
             Bilhete Milionário
@@ -40,9 +41,9 @@ export default function Navbar() {
           >
             <path
               stroke="currentColor"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
               d="M1 1h15M1 7h15M1 13h15"
             />
           </svg>
