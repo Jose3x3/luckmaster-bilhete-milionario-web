@@ -21,8 +21,8 @@ export interface NumberProps
   onValueChange?: OnValueChange
 }
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export function NumberInput({
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   type,
   onValueChange,
   ...restProps

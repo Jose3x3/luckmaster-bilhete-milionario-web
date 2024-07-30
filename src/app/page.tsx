@@ -9,7 +9,6 @@ export default function Home() {
         <div className="bg-primary-800 w-full flex flex-col items-center justify-center rounded-t-2xl sm:p-2 md:p-4 ">
           <Image src={banner} alt="Banner" />
         </div>
-
         <Purchase />
       </div>
     </main>
