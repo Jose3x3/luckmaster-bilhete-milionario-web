@@ -1,12 +1,16 @@
+'use client'
 import CoinGif from '@/assets/imgs/coin.gif'
 import { AwardWithWinner } from '@/types/AwardWithWinner'
 import Image from 'next/image'
+import { useState } from 'react'
+import { Button } from '@/components/Button'
 
 interface AwardsProps {
   awards: AwardWithWinner[]
 }
 
 export function Awards({ awards }: AwardsProps) {
+  const [open, setOpen] = useState<boolean>(false)
   return (
     <>
       <div className="flex justify-between py-2">
@@ -18,12 +22,12 @@ export function Awards({ awards }: AwardsProps) {
         </div>
       </div>
       <div className="grid md:grid-cols-2 grid-cols-1 bg-white shadow rounded-md text-gray-900 sm:p-2 md:p-3">
-        {awards.map((award, index) => (
+        {awards.slice(0, open ? 100 : 10).map((award, index) => (
           <div
             key={award.number}
             className={`flex flex-col md:border-r-2 py-2 px-2 ${index >= 2 ? 'md:mt-6' : 'mt-2'} gap-2`}
           >
-            <div className="flex justify-between items-center ">
+            <div className="flex justify-between items-center">
               <h2 className="font-medium text-md">Bilhete #{award.number}</h2>
               <div
                 className={` ${award.name !== undefined ? 'bg-yellow-400' : 'bg-secondary-500'} text-center w-24 text-sm font-semibold py-1 px-2 rounded-full`}
@@ -44,6 +48,11 @@ export function Awards({ awards }: AwardsProps) {
             </div>
           </div>
         ))}
+        <Button
+          customClass="col-span-full my-4"
+          label={open ? 'Mostrar menos' : 'Mostrar mais'}
+          onClick={() => setOpen((prevState) => !prevState)}
+        />
       </div>
     </>
   )

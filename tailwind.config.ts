@@ -39,6 +39,8 @@ const config: Config = {
         },
         secondary: {
           500: '#00ff5e',
+          600: '#d9357f',
+          700: '#dd2a7b',
         },
       },
       backgroundImage: {

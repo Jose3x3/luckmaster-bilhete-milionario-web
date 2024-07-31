@@ -4,6 +4,8 @@ import './globals.css'
 import Navbar from '@/components/Navbar'
 import { api } from '@/api'
 import { CampaignResponse } from '@/types/CampaingResponse'
+import { Footer } from '@/components/Footer'
+import '@fortawesome/fontawesome-svg-core/styles.css'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -25,6 +27,7 @@ export default async function RootLayout({
       <body className={inter.className}>
         <Navbar campaign={response.data.rifa} />
         {children}
+        <Footer campaign={response.data.rifa} />
       </body>
     </html>
   )
