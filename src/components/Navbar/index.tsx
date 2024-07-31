@@ -1,9 +1,13 @@
 'use client'
 import Image from 'next/image'
-import Logo from '@/assets/imgs/bilhete_milionario.png'
 import { useState } from 'react'
+import { Rifa } from '@/types/Rifa'
 
-export default function Navbar() {
+interface NavbarProps {
+  campaign: Rifa
+}
+
+export default function Navbar({ campaign }: NavbarProps) {
   const [open, setOpen] = useState(false)
 
   const toggleMenu = () => {
@@ -14,13 +18,15 @@ export default function Navbar() {
       <div className="w-full flex flex-wrap items-center justify-between p-4">
         <div className="flex items-center space-x-3 rtl:space-x-reverse">
           <Image
-            src={Logo}
+            src={campaign.logo}
             className="h-14 w-auto"
             alt="Bilhete Milionário Logo"
+            width={1920}
+            height={1080}
             priority
           />
           <span className="self-center text-white text-xl font-semibold whitespace-nowrap dark:text-white">
-            Bilhete Milionário
+            {campaign.titulo_pagina}
           </span>
         </div>
         <button

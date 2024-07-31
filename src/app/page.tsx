@@ -1,21 +1,57 @@
-import banner from '@/assets/imgs/banner.jpg'
 import Image from 'next/image'
 import { Purchase } from '@/app/_components/Purchase'
+import { Awards } from '@/app/_components/Awards'
+import { api } from '@/api'
+import { CampaignResponse } from '@/types/CampaingResponse'
+import { Description } from '@/app/_components/Description'
+import { AwardResponse } from '@/types/AwardResponse'
+import { WinnerResponse } from '@/types/WinnerResponse'
+import { AwardWithWinner } from '@/types/AwardWithWinner'
 
-export default function Home() {
+export default async function Home() {
+  const [campaignReponse, awardResponse, awardWinnersResponse] =
+    await Promise.all([
+      api.get<CampaignResponse>(
+        '/user/find/sharedcampaign/94e57731-e792-4ca2-a74c-31381d1e7dec',
+      ),
+      api.get<AwardResponse>(
+        '/rifa/award/force/list/1ece0b0a-25b3-4111-9c88-e1bf2093bcd2/1/10?isAdminPanel=false',
+      ),
+      api.get<WinnerResponse>(
+        '/user/find/awards/winner/1ece0b0a-25b3-4111-9c88-e1bf2093bcd2',
+      ),
+    ])
+
+  const awardWithWinners: AwardWithWinner[] = awardResponse.data.awards.map(
+    (award) => ({
+      ...award,
+      name:
+        awardWinnersResponse.data.winners === null
+          ? undefined
+          : awardWinnersResponse.data.winners.find(
+              (winner) => winner.number === award.number,
+            )?.name,
+    }),
+  )
   return (
     <main className="text-white flex min-h-screen flex-col items-center gap-4 md:p-10">
       <div className="max-w-[550px] w-full">
         <div className="bg-white shadow w-full flex flex-col items-center justify-center rounded-t-2xl sm:p-2 md:p-3 ">
           <Image
-            className="rounded-2xl h-80 w-auto md:h-96 p-2 md:p-0"
-            src={banner}
+            className="rounded-2xl h-80 w-auto p-2 md:p-0"
+            src={campaignReponse.data.rifa.imagem}
+            width={1920}
+            height={1080}
             alt="Banner"
             priority
           />
         </div>
-
-        <Purchase />
+        <Purchase
+          campaign={campaignReponse.data.rifa}
+          promotion={campaignReponse.data.promotions[0]}
+        />
+        <Description rifa={campaignReponse.data.rifa} />
+        <Awards awards={awardWithWinners} />
       </div>
     </main>
   )

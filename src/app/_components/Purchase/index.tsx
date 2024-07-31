@@ -5,12 +5,20 @@ import { TicketIcon } from '@heroicons/react/24/solid'
 import { Input } from '@/components/Input'
 import { useEffect, useState } from 'react'
 import { formatValue } from '@/utils'
+import { Rifa } from '@/types/Rifa'
+import { Promotion } from '@/types/Promotion'
 
-export function Purchase() {
-  const oldValue = 0.2
-  const promoValue = 9.99 / 100
-  const minQtd = 10
-  const [qtd, setQtd] = useState(0)
+interface PurchaseProps {
+  campaign: Rifa
+  promotion: Promotion
+}
+
+export function Purchase({ campaign, promotion }: PurchaseProps) {
+  const oldValue = campaign.preco_por_numero
+  const promoValue = promotion.valor / promotion.quantidade
+  const minQtd = campaign.qntd_min
+  const quantities = [20, 50, 100, 200]
+  const [qtd, setQtd] = useState(minQtd)
   const [value, setValue] = useState(oldValue)
 
   useEffect(() => {
@@ -36,44 +44,29 @@ export function Purchase() {
       </div>
 
       <Button
-        className="w-full mb-2 cursor-default font-semibold rounded-md bg-yellow-400 hover:bg-yellow-500 shadow-sm animate-pulse h-20 md:text-xl text-lg text-gray-900"
+        className="w-full mb-2 cursor-pointer font-semibold rounded-md bg-yellow-400 hover:bg-yellow-500 shadow-sm animate-pulse h-20 md:text-xl text-lg text-gray-900"
         label={
           <div className="flex justify-center items-center">
-            <span className="mx-8">100 bilhetes por apenas R$ 9,99</span>
+            <span className="mx-8">
+              {promotion.quantidade} bilhetes por apenas{' '}
+              {formatValue(promotion.valor)}
+            </span>
           </div>
         }
       />
 
       <div className="p-4 bg-white shadow rounded-md w-full rounded-b-md">
         <div className="py-4 rounded-md w-full grid grid-cols-4 gap-3 items-center p-1">
-          <Button
-            label={`+${handleQtdValue(20)}`}
-            variant="info"
-            onClick={() =>
-              setQtd((prevState) => prevState + handleQtdValue(20))
-            }
-          />
-          <Button
-            label={`+${handleQtdValue(50)}`}
-            variant="info"
-            onClick={() =>
-              setQtd((prevState) => prevState + handleQtdValue(50))
-            }
-          />
-          <Button
-            label={`+${handleQtdValue(100)}`}
-            variant="info"
-            onClick={() =>
-              setQtd((prevState) => prevState + handleQtdValue(100))
-            }
-          />
-          <Button
-            label={`+${handleQtdValue(200)}`}
-            variant="info"
-            onClick={() =>
-              setQtd((prevState) => prevState + handleQtdValue(200))
-            }
-          />
+          {quantities.map((quantity) => (
+            <Button
+              label={`+${handleQtdValue(quantity)}`}
+              variant="info"
+              key={quantity}
+              onClick={() =>
+                setQtd((prevState) => prevState + handleQtdValue(quantity))
+              }
+            />
+          ))}
         </div>
         <div className="flex flex-col gap-2">
           <div className="flex items-center gap-2">
@@ -84,6 +77,7 @@ export function Purchase() {
               onClick={() =>
                 setQtd((prevState) => {
                   const total = prevState - 1
+                  if (total < minQtd) return minQtd
                   if (total >= 0) return total
                   return 0
                 })
