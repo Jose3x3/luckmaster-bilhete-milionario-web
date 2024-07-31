@@ -53,6 +53,7 @@ export function Purchase({ campaign, promotion }: PurchaseProps) {
             </span>
           </div>
         }
+        onClick={() => setQtd((prevState) => prevState + 100)}
       />
 
       <div className="p-4 bg-white shadow rounded-md w-full rounded-b-md">
