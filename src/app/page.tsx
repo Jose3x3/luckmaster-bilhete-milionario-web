@@ -15,7 +15,7 @@ export default async function Home() {
         '/user/find/sharedcampaign/94e57731-e792-4ca2-a74c-31381d1e7dec',
       ),
       api.get<AwardResponse>(
-        `/rifa/award/force/list/1ece0b0a-25b3-4111-9c88-e1bf2093bcd2/1/100?isAdminPanel=false`,
+        `/rifa/award/force/list/1ece0b0a-25b3-4111-9c88-e1bf2093bcd2/1/1000?isAdminPanel=false`,
       ),
       api.get<WinnerResponse>(
         '/user/find/awards/winner/1ece0b0a-25b3-4111-9c88-e1bf2093bcd2',
@@ -34,11 +34,11 @@ export default async function Home() {
     }),
   )
   return (
-    <main className="text-white flex min-h-screen flex-col items-center gap-4 md:p-10">
+    <main className="text-white flex min-h-screen flex-col items-center gap-4 p-2 md:p-10">
       <div className="max-w-[550px] w-full">
         <div className="bg-white shadow w-full flex flex-col items-center justify-center rounded-t-2xl sm:p-2 md:p-3 ">
           <Image
-            className="rounded-2xl md:h-80 h-56 w-auto p-2 md:p-0"
+            className="rounded-2xl w-full h-auto p-2 md:p-0"
             src={campaignReponse.data.rifa.imagem}
             width={1920}
             height={1080}

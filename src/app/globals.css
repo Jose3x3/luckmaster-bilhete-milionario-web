@@ -20,3 +20,14 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
   monospace;
 }
+
+.cursor-animation {
+  background-image: url('/src/assets/imgs/click.gif'); /* Caminho para a imagem do cursor */
+  animation: click-animation 1s infinite; /* Ajuste a animação conforme necessário */
+}
+
+@keyframes click-animation {
+  0% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0; transform: scale(1.2); }
+  100% { opacity: 1; transform: scale(1); }
+}

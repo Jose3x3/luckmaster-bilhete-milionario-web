@@ -32,7 +32,7 @@ export function Purchase({ campaign, promotion }: PurchaseProps) {
   }
 
   return (
-    <>
+    <div className="flex flex-col justify-center items-center">
       <div className="flex justify-center items-center bg-white w-full rounded-b-md mb-2 gap-2 pb-2">
         <TicketIcon className="text-primary-700 size-7" />
         <h3 className="text-primary-700 bg font-semibold text-md mb">
@@ -44,14 +44,14 @@ export function Purchase({ campaign, promotion }: PurchaseProps) {
       </div>
 
       <Button
-        className="w-full mb-2 cursor-pointer font-semibold rounded-md bg-yellow-400 hover:bg-yellow-500 shadow-sm animate-pulse h-20 md:text-xl text-lg text-gray-900"
+        className="relative w-[98%] mb-2 cursor-pointer font-semibold rounded-md bg-yellow-400 shadow-sm animate-pulse h-16 md:text-xl text-lg text-white"
         label={
-          <div className="flex justify-center items-center">
-            <span className="mx-8">
+          <>
+            <span className="block mx-8">
               {promotion.quantidade} bilhetes por apenas{' '}
               {formatValue(promotion.valor)}
             </span>
-          </div>
+          </>
         }
         onClick={() => setQtd((prevState) => prevState + 100)}
       />
@@ -118,11 +118,11 @@ export function Purchase({ campaign, promotion }: PurchaseProps) {
             </div>
           </div>
           <Button
-            className="mt-1 font-semibold rounded-[50px] bg-secondary-500 hover:bg-secondary-500 shadow-sm animate-pulse h-14 text-xl text-gray-900"
+            className="mt-1 font-semibold rounded-[50px] bg-green-500 shadow-sm animate-pulse h-14 text-xl text-white"
             label="Quero Participar!!"
           />
         </div>
       </div>
-    </>
+    </div>
   )
 }
