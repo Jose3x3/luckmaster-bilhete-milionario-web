@@ -13,6 +13,7 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
     | 'default'
     | 'info'
     | 'warning'
+    | 'other'
 }
 
 export function Button({
@@ -47,6 +48,19 @@ export function Button({
         {...rest}
       >
         {label}
+      </button>
+    )
+  if (variant === 'other')
+    return (
+      <button
+        className="bg-yellow-500 hover:!bg-yellow-400 rounded-md button-spark h-14"
+        {...rest}
+      >
+        <span className="spark__container">
+          <span className="spark rounded-md" />
+        </span>
+        <span className="backdrop rounded-md" />
+        <span className="text !text-gray-900 font-bold">{label}</span>
       </button>
     )
 }

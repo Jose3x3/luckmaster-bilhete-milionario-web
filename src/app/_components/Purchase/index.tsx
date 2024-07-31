@@ -42,20 +42,16 @@ export function Purchase({ campaign, promotion }: PurchaseProps) {
           </span>
         </h3>
       </div>
-
-      <Button
-        className="relative w-[98%] mb-2 cursor-pointer font-semibold rounded-md bg-yellow-400 shadow-sm animate-pulse h-16 md:text-xl text-lg text-white"
-        label={
-          <>
-            <span className="block mx-8">
-              {promotion.quantidade} bilhetes por apenas{' '}
-              {formatValue(promotion.valor)}
-            </span>
-          </>
-        }
-        onClick={() => setQtd((prevState) => prevState + 100)}
-      />
-
+      <div className="flex flex-col w-full gap-2 rounded p-4 flex bg-white mb-2">
+        <h2 className="text-gray-900 font-bold text-xl">
+          Promoção por Tempo Limitado!!
+        </h2>
+        <Button
+          label={`${promotion.quantidade} bilhetes por apenas ${formatValue(promotion.valor)}`}
+          variant="other"
+          onClick={() => setQtd((prevState) => prevState + 100)}
+        />
+      </div>
       <div className="p-4 bg-white shadow rounded-md w-full rounded-b-md">
         <div className="py-4 rounded-md w-full grid grid-cols-4 gap-3 items-center p-1">
           {quantities.map((quantity) => (

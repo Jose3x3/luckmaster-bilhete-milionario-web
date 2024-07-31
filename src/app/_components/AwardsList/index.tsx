@@ -28,7 +28,7 @@ export function AwardsList({ awards, title }: AvailableAwardsProps) {
             <div className="flex justify-between items-center">
               <h2 className="font-medium text-md">Bilhete #{award.number}</h2>
               <div
-                className={` ${award.name !== undefined ? 'bg-yellow-400' : 'bg-secondary-500'} text-center w-24 text-sm font-semibold py-1 px-2 rounded-full`}
+                className={` ${award.name !== undefined ? 'bg-yellow-400' : 'bg-green-500'} text-white text-center w-24 text-sm font-semibold py-1 px-2 rounded-full`}
               >
                 {award.name !== undefined ? 'Vencedor' : 'Disponível'}
               </div>
