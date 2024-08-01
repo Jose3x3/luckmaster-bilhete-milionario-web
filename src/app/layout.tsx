@@ -5,7 +5,10 @@ import Navbar from '@/components/Navbar'
 import { api } from '@/api'
 import { CampaignResponse } from '@/types/CampaingResponse'
 import { Footer } from '@/components/Footer'
+import 'react-toastify/dist/ReactToastify.css'
 import '@fortawesome/fontawesome-svg-core/styles.css'
+import { ToastContainer } from 'react-toastify'
+import { Providers } from '@/providers'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -25,9 +28,14 @@ export default async function RootLayout({
   return (
     <html lang="pt-br">
       <body className={inter.className}>
-        <Navbar campaign={response.data.rifa} />
-        {children}
-        <Footer campaign={response.data.rifa} />
+        <Providers>
+          <div className="flex flex-col h-screen justify-between">
+            <Navbar campaign={response.data.rifa} />
+            {children}
+            <Footer campaign={response.data.rifa} />
+          </div>
+          <ToastContainer />
+        </Providers>
       </body>
     </html>
   )

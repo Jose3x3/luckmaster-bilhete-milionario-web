@@ -15,10 +15,10 @@ export default async function Home() {
         '/user/find/sharedcampaign/94e57731-e792-4ca2-a74c-31381d1e7dec',
       ),
       api.get<AwardResponse>(
-        `/rifa/award/force/list/1ece0b0a-25b3-4111-9c88-e1bf2093bcd2/1/1000?isAdminPanel=false`,
+        `/rifa/award/force/list/0111de6e-b225-4d13-a906-a523afbff5cc/1/1000?isAdminPanel=false`,
       ),
       api.get<WinnerResponse>(
-        '/user/find/awards/winner/1ece0b0a-25b3-4111-9c88-e1bf2093bcd2',
+        '/user/find/awards/winner/0111de6e-b225-4d13-a906-a523afbff5cc',
       ),
     ])
 
@@ -34,7 +34,7 @@ export default async function Home() {
     }),
   )
   return (
-    <main className="text-white flex min-h-screen flex-col items-center gap-4 p-2 md:p-10">
+    <main className="text-white flex flex-col items-center gap-4 p-2 md:p-10">
       <div className="max-w-[550px] w-full">
         <div className="bg-white shadow w-full flex flex-col items-center justify-center rounded-t-2xl sm:p-2 md:p-3 ">
           <Image

@@ -15,6 +15,7 @@ interface InputProps
   containerClass?: string
   errorMessage?: string
   onValueChange?: OnValueChange
+  type?: 'tel' | 'number' | 'cpf' | 'text' | 'password' | 'email'
 }
 
 export function Input({
@@ -24,14 +25,22 @@ export function Input({
   required,
   register,
   onValueChange,
+  type = 'text',
   ...rest
 }: InputProps) {
   const customClass = `block outline-none w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-primary-500 sm:text-sm sm:leading-6 ${rest.className}`
 
   function handleInputs() {
-    if (rest.type === 'phone')
-      return <MaskInput className={customClass} register={register} {...rest} />
-    if (rest.type === 'number')
+    if (type === 'tel' || type === 'cpf')
+      return (
+        <MaskInput
+          className={customClass}
+          register={register}
+          type={type}
+          {...rest}
+        />
+      )
+    if (type === 'number')
       return (
         <NumberInput
           className={customClass}

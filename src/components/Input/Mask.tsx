@@ -8,12 +8,14 @@ interface MaskInputProps
     HTMLInputElement
   > {
   register?: UseFormRegisterReturn<string>
+  type: 'cpf' | 'tel'
 }
 
 export function MaskInput(props: MaskInputProps) {
   const cellPhone = '(__) _____-____'
+  const cpf = '___.___.___-__'
   const inputRef = useMask({
-    mask: cellPhone,
+    mask: props.type === 'cpf' ? cpf : cellPhone,
     replacement: { _: /\d/ },
   })
 

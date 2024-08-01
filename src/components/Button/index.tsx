@@ -25,7 +25,7 @@ export function Button({
   if (variant === 'primary')
     return (
       <button
-        className={`flex rounded-md justify-center bg-primary-700 hover:bg-primary-500 w-full px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 ${customClass}`}
+        className={`flex rounded-md justify-center items-center bg-primary-700 hover:bg-primary-500 w-full px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 ${customClass}`}
         {...rest}
       >
         {label}
@@ -53,14 +53,14 @@ export function Button({
   if (variant === 'other')
     return (
       <button
-        className="bg-yellow-500 hover:!bg-yellow-400 rounded-md button-spark h-14"
+        className="bg-yellow-500 hover:!bg-yellow-400 rounded-md button-spark h-16"
         {...rest}
       >
         <span className="spark__container">
           <span className="spark rounded-md" />
         </span>
         <span className="backdrop rounded-md" />
-        <span className="text !text-gray-900 font-bold">{label}</span>
+        {label}
       </button>
     )
 }

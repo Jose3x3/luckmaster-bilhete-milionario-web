@@ -2,6 +2,7 @@
 import Image from 'next/image'
 import { useState } from 'react'
 import { Rifa } from '@/types/Rifa'
+import { LoginModal } from '@/components/LoginModal'
 
 interface NavbarProps {
   campaign: Rifa
@@ -9,6 +10,7 @@ interface NavbarProps {
 
 export default function Navbar({ campaign }: NavbarProps) {
   const [open, setOpen] = useState(false)
+  const [openLoginModal, setOpenLoginModal] = useState(false)
 
   const toggleMenu = () => {
     setOpen((prevState) => !prevState)
@@ -57,10 +59,15 @@ export default function Navbar({ campaign }: NavbarProps) {
         <div
           className={`${open ? 'block' : 'hidden'} flex text-white md:block font-semibold mx-6`}
         >
-          <span className="cursor-pointer mx-4">Meus Bilhetes</span>
-          <span className="cursor-pointer mx-4">Desconectar</span>
+          <button
+            className="cursor-pointer mx-4"
+            onClick={() => setOpenLoginModal(true)}
+          >
+            Entrar/Registrar
+          </button>
         </div>
       </div>
+      <LoginModal open={openLoginModal} setOpen={setOpenLoginModal} />
     </nav>
   )
 }
