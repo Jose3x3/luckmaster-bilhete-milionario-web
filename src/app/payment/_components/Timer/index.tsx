@@ -10,9 +10,10 @@ import { PaymentCompletedResponse } from '@/types/PaymentCompletedResponse'
 type TimerProps = {
   date: Date
   txId: string
+  token: string
 }
 
-export function Timer({ date, txId }: TimerProps) {
+export function Timer({ date, txId, token }: TimerProps) {
   const {
     minutes,
     seconds,
@@ -37,7 +38,15 @@ export function Timer({ date, txId }: TimerProps) {
   useEffect(() => {
     setInterval(async () => {
       const { data: paymentCompletedResponse } =
-        await api.post<PaymentCompletedResponse>(`/payment/completed/${txId}`)
+        await api.post<PaymentCompletedResponse>(
+          `/payment/completed/${txId}`,
+          {},
+          {
+            headers: {
+              Authorization: token,
+            },
+          },
+        )
       setPaymentData(paymentCompletedResponse)
 
       setTime((prevState) => prevState - 5000)

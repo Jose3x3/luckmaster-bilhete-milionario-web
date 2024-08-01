@@ -44,10 +44,11 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           type: 'boolean',
         },
       },
+      type: 'credentials',
       authorize: async (credentials) => {
         try {
           let response: AxiosResponse<LoginResponse>
-          if (credentials.is_login)
+          if (JSON.parse(credentials.is_login as string))
             response = await api.post<LoginResponse>('/user/auth/login', {
               phone_number: credentials.phone_number,
             })
@@ -59,7 +60,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
               cpf: credentials.cpf,
               email: credentials.email,
             })
-          if (response.data.message) return null
+          if (response.data.message === 'usuario não cadastrado') return null
           const token = response.data.token
           const user = parseJwt(token)
           if (user) return user

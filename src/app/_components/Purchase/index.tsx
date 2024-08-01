@@ -14,6 +14,7 @@ import { PaymentResponse } from '@/types/PaymentResponse'
 import { toast } from 'react-toastify'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { useCookies } from 'react-cookie'
+import { LoginModal } from '@/components/LoginModal'
 
 interface PurchaseProps {
   campaign: Rifa
@@ -30,7 +31,8 @@ export function Purchase({ campaign, promotion }: PurchaseProps) {
   const [openPurchase, setOpenPurchase] = useState(false)
   const router = useRouter()
   const searchParams = useSearchParams()
-  const [, setCookies] = useCookies(['pix', 'txId', 'value'])
+  const [openLoginModal, setOpenLoginModal] = useState(false)
+  const [cookies, setCookies] = useCookies(['pix', 'txId', 'value', 'token'])
 
   const createQueryString = useCallback(
     (name: string, value: string) => {
@@ -203,6 +205,10 @@ export function Purchase({ campaign, promotion }: PurchaseProps) {
           <Button
             customClass="!bg-green-500 hover:!bg-green-400"
             onClick={async () => {
+              if (!cookies.token) {
+                setOpenLoginModal(true)
+                return
+              }
               await handlePurchase({
                 quantidade_numeros: qtd,
                 shared_id: 'f1841e33-42c0-46ed-8e4c-078517cc0c26',
@@ -216,6 +222,7 @@ export function Purchase({ campaign, promotion }: PurchaseProps) {
           />
         </div>
       </Modal>
+      <LoginModal open={openLoginModal} setOpen={setOpenLoginModal} />
     </div>
   )
 }

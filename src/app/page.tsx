@@ -1,5 +1,4 @@
 import Image from 'next/image'
-import { Purchase } from '@/app/_components/Purchase'
 import { Awards } from '@/app/_components/Awards'
 import { api } from '@/api'
 import { CampaignResponse } from '@/types/CampaingResponse'
@@ -7,6 +6,7 @@ import { Description } from '@/app/_components/Description'
 import { AwardResponse } from '@/types/AwardResponse'
 import { WinnerResponse } from '@/types/WinnerResponse'
 import { AwardWithWinner } from '@/types/AwardWithWinner'
+import { SuspensePurchase } from '@/app/_components/SuspensePurchase'
 
 export default async function Home() {
   const [campaignReponse, awardResponse, awardWinnersResponse] =
@@ -46,7 +46,7 @@ export default async function Home() {
             priority
           />
         </div>
-        <Purchase
+        <SuspensePurchase
           campaign={campaignReponse.data.rifa}
           promotion={campaignReponse.data.promotions[0]}
         />

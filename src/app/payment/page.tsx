@@ -23,6 +23,7 @@ export default async function Payment({
   const value = cookieStore.get('value')?.value
   const pix = cookieStore.get('pix')?.value
   const txId = cookieStore.get('txId')?.value
+  const token = cookieStore.get('token')?.value
 
   return (
     <main className="text-gray-900 flex flex-col items-center gap-4 p-2 md:p-10">
@@ -42,9 +43,9 @@ export default async function Payment({
             priority
           />
 
-          {pix && txId && (
+          {pix && txId && token && (
             <>
-              <Timer date={generatedDate} txId={txId} />
+              <Timer date={generatedDate} txId={txId} token={token} />
               <Pix pix={pix} />
               {value && <CopyAndPastePix pix={pix} value={Number(value)} />}
             </>

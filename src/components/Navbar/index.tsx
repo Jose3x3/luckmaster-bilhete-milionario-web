@@ -3,6 +3,7 @@ import Image from 'next/image'
 import { useState } from 'react'
 import { Rifa } from '@/types/Rifa'
 import { LoginModal } from '@/components/LoginModal'
+import { useCookies } from 'react-cookie'
 
 interface NavbarProps {
   campaign: Rifa
@@ -11,9 +12,14 @@ interface NavbarProps {
 export default function Navbar({ campaign }: NavbarProps) {
   const [open, setOpen] = useState(false)
   const [openLoginModal, setOpenLoginModal] = useState(false)
+  const [cookies, , removeCookie] = useCookies(['token'])
 
   const toggleMenu = () => {
     setOpen((prevState) => !prevState)
+  }
+
+  const signOut = () => {
+    removeCookie('token')
   }
   return (
     <nav className="flex bg-primary-700 shadow flex-col justify-between shadow">
@@ -59,12 +65,18 @@ export default function Navbar({ campaign }: NavbarProps) {
         <div
           className={`${open ? 'block' : 'hidden'} flex text-white md:block font-semibold mx-6`}
         >
-          <button
-            className="cursor-pointer mx-4"
-            onClick={() => setOpenLoginModal(true)}
-          >
-            Entrar/Registrar
-          </button>
+          {!cookies.token ? (
+            <button
+              className="cursor-pointer mx-4"
+              onClick={() => setOpenLoginModal(true)}
+            >
+              Entrar/Registrar
+            </button>
+          ) : (
+            <button className="cursor-pointer mx-4" onClick={() => signOut()}>
+              Desconectar
+            </button>
+          )}
         </div>
       </div>
       <LoginModal open={openLoginModal} setOpen={setOpenLoginModal} />

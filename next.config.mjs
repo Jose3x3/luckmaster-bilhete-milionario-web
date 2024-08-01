@@ -8,7 +8,10 @@ const nextConfig = {
                 pathname:'/rifando_images/rifas/**'
             }
         ]
-    }
+    },
+    experimental: {
+        missingSuspenseWithCSRBailout: false,
+    },
 };
 
 export default nextConfig;

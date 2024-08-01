@@ -4,6 +4,6 @@
     "next/core-web-vitals"
   ],
   "rules": {
-    "no-extra-boolean-cas": "off"
+    "no-extra-boolean-cast": "off"
   }
 }
