@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { Rifa } from '@/types/Rifa'
 import { LoginModal } from '@/components/LoginModal'
 import { useCookies } from 'react-cookie'
+import { useRouter } from 'next/navigation'
 
 interface NavbarProps {
   campaign: Rifa
@@ -13,6 +14,7 @@ export default function Navbar({ campaign }: NavbarProps) {
   const [open, setOpen] = useState(false)
   const [openLoginModal, setOpenLoginModal] = useState(false)
   const [cookies, , removeCookie] = useCookies(['token'])
+  const router = useRouter()
 
   const toggleMenu = () => {
     setOpen((prevState) => !prevState)
@@ -74,9 +76,20 @@ export default function Navbar({ campaign }: NavbarProps) {
               Entrar/Registrar
             </button>
           ) : (
-            <button className="cursor-pointer mx-4" onClick={() => signOut()}>
-              Desconectar
-            </button>
+            <>
+              <button
+                className="cursor-pointer mx-4"
+                onClick={() => {
+                  router.push('/tickets')
+                }}
+              >
+                Meus Bilhetes
+              </button>
+
+              <button className="cursor-pointer mx-4" onClick={() => signOut()}>
+                Desconectar
+              </button>
+            </>
           )}
         </div>
       </div>
