@@ -39,12 +39,42 @@ const config: Config = {
         },
         secondary: {
           500: '#00ff5e',
+          600: '#d9357f',
+          700: '#dd2a7b',
         },
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic':
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+      },
+      keyframes: {
+        jiggle: {
+          '0%': {
+            transform: 'scale3d(1, 1, 1)',
+          },
+          '30%': {
+            transform: 'scale3d(1.25, 0.75, 1)',
+          },
+          '40%': {
+            transform: 'scale3d(0.75, 1.25, 1)',
+          },
+          '50%': {
+            transform: 'scale3d(1.15, 0.85, 1)',
+          },
+          '65%': {
+            transform: 'scale3d(0.95, 1.05, 1)',
+          },
+          '75%': {
+            transform: 'scale3d(1.05, 0.95, 1)',
+          },
+          '100%': {
+            transform: 'scale3d(1, 1, 1)',
+          },
+        },
+      },
+      animation: {
+        jiggle: 'jiggle 0.6s ease-in-out 0.25s 1',
       },
     },
   },
