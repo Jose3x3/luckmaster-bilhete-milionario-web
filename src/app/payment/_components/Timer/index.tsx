@@ -49,7 +49,6 @@ export function Timer({ date, txId, token }: TimerProps) {
             },
           },
         )
-      console.log(paymentCompletedResponse.pagamento)
       if (paymentCompletedResponse.pagamento !== null)
         updateStatus(paymentCompletedResponse.pagamento.status)
     }

@@ -4,6 +4,7 @@ import { toast } from 'react-toastify'
 import { Input } from '@/components/Input'
 import { formatValue } from '@/utils'
 import { usePayment } from '@/providers/payment'
+import { useRouter } from 'next/navigation'
 
 interface CopyAndPastePixProps {
   pix: string
@@ -11,17 +12,18 @@ interface CopyAndPastePixProps {
   token: string
 }
 
-export function CopyAndPastePix({ pix, value, token }: CopyAndPastePixProps) {
+
+export function CopyAndPastePix({ pix, value }: CopyAndPastePixProps) {
   const { status } = usePayment()
+  const router = useRouter()
+
   const copyPaste = () => {
     navigator.clipboard.writeText(pix)
     toast.success('Chave pix copiada com sucesso')
   }
 
   const handleTickets = () => {
-    localStorage.setItem('@Code:JWT_TOKEN', token)
-    window.location.href =
-      'https://www.luckmastersorteio.com.br/campaign/bilhetes'
+    router.push('/tickets')
   }
   if (status === 'CONCLUIDA')
     return (

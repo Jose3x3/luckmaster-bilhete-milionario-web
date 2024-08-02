@@ -88,15 +88,11 @@ export function Purchase({
       toast.success('Pix gerado com sucesso, você será redirecionado.', {
         autoClose: waitTime,
       })
-      setTimeout(() => {
-        router.push(
-          '/payment?' +
-            createQueryString(
-              'generated_date',
-              String(generatedDate.getTime()),
-            ),
-        )
-      }, waitTime)
+
+      router.push(
+        '/payment?' +
+          createQueryString('generated_date', String(generatedDate.getTime())),
+      )
     } catch (error) {
       toast.error('Erro ao gerar pix, por favor consulte o suporte')
     }
