@@ -1,33 +1,40 @@
+'use client'
 import { api } from '@/api'
-import { cookies } from 'next/headers'
 import { Ticket } from '@/types/Ticket'
 import { Card } from '@/app/tickets/_components/Card'
 import cryImg from '@/assets/imgs/crying.svg'
+import { useCookies } from 'react-cookie'
+import { useEffect, useState } from 'react'
 
-export default async function Tickets() {
-  const cookieStore = cookies()
-  const token = cookieStore.get('token')?.value
-  const response = await api.get<{ purchases: Ticket[] }>(
-    '/user/find/purchases',
-    {
-      headers: {
-        Authorization: token,
-      },
-    },
-  )
+export default function Tickets() {
+  const [cookies] = useCookies(['token'])
+  const token = cookies.token
+  const [tickets, setTickets] = useState<Ticket[]>([])
+
+  useEffect(() => {
+    const handleTickets = async () => {
+      const response = await api.get<{ purchases: Ticket[] }>(
+        '/user/find/purchases',
+        {
+          headers: {
+            Authorization: token,
+          },
+        },
+      )
+      setTickets(response.data.purchases)
+    }
+    handleTickets()
+  }, [token])
+
   const verificaNum = () => {
-    const index = response.data.purchases.findIndex((value) =>
-      Array.isArray(value.numeros),
-    )
+    const index = tickets.findIndex((value) => Array.isArray(value.numeros))
     return index > -1
   }
   return (
     <main className="text-gray-900 flex flex-col items-center gap-4 p-2 md:p-10">
       <h1>Meus Bilhetes</h1>
-      {response.data.purchases &&
-      response.data.purchases.length > 0 &&
-      verificaNum() ? (
-        response.data.purchases.map((ticket) => (
+      {tickets && tickets.length > 0 && verificaNum() ? (
+        tickets.map((ticket) => (
           <Card key={ticket.pago_horario} ticket={ticket} />
         ))
       ) : (
