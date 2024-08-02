@@ -2,8 +2,6 @@
 import { Ticket } from '@/types/Ticket'
 import { formatValue } from '@/utils'
 import { useState } from 'react'
-import { Button } from '@/components/Button'
-import { PlusIcon } from '@heroicons/react/24/outline'
 
 interface CardProps {
   ticket: Ticket
@@ -11,13 +9,6 @@ interface CardProps {
 
 export function Card({ ticket }: CardProps) {
   const [titleId, setTitleId] = useState<string>('')
-  const handleToggle = (rifaId: string) => {
-    if (titleId === rifaId) {
-      setTitleId('')
-    } else {
-      setTitleId(rifaId)
-    }
-  }
 
   function formatDate(dataString: string): string {
     const date: string = new Date(dataString).toLocaleDateString('pt-BR')
