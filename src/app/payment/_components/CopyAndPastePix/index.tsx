@@ -9,11 +9,14 @@ import { useRouter } from 'next/navigation'
 interface CopyAndPastePixProps {
   pix: string
   value: number
+  token: string
 }
+
 
 export function CopyAndPastePix({ pix, value }: CopyAndPastePixProps) {
   const { status } = usePayment()
   const router = useRouter()
+
   const copyPaste = () => {
     navigator.clipboard.writeText(pix)
     toast.success('Chave pix copiada com sucesso')
