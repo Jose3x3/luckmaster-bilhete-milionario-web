@@ -1,15 +1,12 @@
 'use client'
 import { Ticket } from '@/types/Ticket'
 import { formatValue } from '@/utils'
-import { useState } from 'react'
 
 interface CardProps {
   ticket: Ticket
 }
 
 export function Card({ ticket }: CardProps) {
-  const [titleId] = useState<string>('')
-
   function formatDate(dataString: string): string {
     const date: string = new Date(dataString).toLocaleDateString('pt-BR')
     return date
@@ -93,7 +90,7 @@ export function Card({ ticket }: CardProps) {
             Bilhete(s)
           </span>
           <span
-            className={`${ticket.rifa_id === titleId ? ' overflow-auto' : 'max-h-[40px] overflow-hidden'} text-gray-700 font-normal text-xl flex flex-wrap gap-4`}
+            className={`overflow-auto text-gray-700 font-normal text-xl flex flex-wrap gap-4`}
           >
             {Array.isArray(ticket?.numeros) &&
               ticket?.numeros.map((numero: number) => (
