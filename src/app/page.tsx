@@ -6,7 +6,7 @@ import { Description } from '@/app/_components/Description'
 import { AwardResponse } from '@/types/AwardResponse'
 import { WinnerResponse } from '@/types/WinnerResponse'
 import { AwardWithWinner } from '@/types/AwardWithWinner'
-import { SuspensePurchase } from '@/app/_components/SuspensePurchase'
+import { Purchase } from '@/app/_components/Purchase'
 
 export default async function Home({
   searchParams,
@@ -50,11 +50,13 @@ export default async function Home({
             priority
           />
         </div>
-        <SuspensePurchase
+
+        <Purchase
           campaign={campaignReponse.data.rifa}
           promotion={campaignReponse.data.promotions[0]}
           sharedCampaignId={searchParams.sharedcampaignId as string}
         />
+
         <Description rifa={campaignReponse.data.rifa} />
         <Awards awards={awardWithWinners} />
       </div>
