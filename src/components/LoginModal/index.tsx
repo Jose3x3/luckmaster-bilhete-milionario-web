@@ -90,7 +90,9 @@ export function LoginModal({ open, setOpen }: LoginModalProps) {
         cpf: data.cpf,
         email: data.email,
       })
+      const user = parseJwt(response.data.token)
       setCookies('token', response.data.token)
+      setCookies('userid', user.id)
       toast.success('Cadastro efetuado com sucesso')
       setOpen(false)
     } catch (error) {
