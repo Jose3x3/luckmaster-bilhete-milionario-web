@@ -8,7 +8,7 @@ interface CardProps {
 }
 
 export function Card({ ticket }: CardProps) {
-  const [titleId, setTitleId] = useState<string>('')
+  const [titleId] = useState<string>('')
 
   function formatDate(dataString: string): string {
     const date: string = new Date(dataString).toLocaleDateString('pt-BR')
