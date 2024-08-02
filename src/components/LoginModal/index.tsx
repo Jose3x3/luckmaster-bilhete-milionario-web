@@ -11,6 +11,7 @@ import { toast } from 'react-toastify'
 import { api } from '@/api'
 import { LoginResponse } from '@/types/LoginResponse'
 import { useCookies } from 'react-cookie'
+import { parseJwt } from '@/utils'
 
 const registerFormSchema = z.object({
   name: z
@@ -38,7 +39,7 @@ export function LoginModal({ open, setOpen }: LoginModalProps) {
   const [isRegister, setIsRegister] = useState<boolean>(false)
   const [cellphoneError, setCellphoneError] = useState<string>('')
   const [cellphone, setCellphone] = useState<string>('')
-  const [, setCookies] = useCookies(['token'])
+  const [, setCookies] = useCookies(['token', 'userid'])
 
   const {
     handleSubmit,
@@ -65,7 +66,10 @@ export function LoginModal({ open, setOpen }: LoginModalProps) {
         setIsRegister(true)
         return
       }
+      const user = parseJwt(response.data.token)
       setCookies('token', response.data.token)
+      setCookies('userid', user.id)
+
       toast.success('Login efetuado com sucesso')
       setOpen(false)
     } catch (error) {
@@ -86,7 +90,9 @@ export function LoginModal({ open, setOpen }: LoginModalProps) {
         cpf: data.cpf,
         email: data.email,
       })
+      const user = parseJwt(response.data.token)
       setCookies('token', response.data.token)
+      setCookies('userid', user.id)
       toast.success('Cadastro efetuado com sucesso')
       setOpen(false)
     } catch (error) {

@@ -1,5 +1,5 @@
 export type PaymentCompletedResponse = {
-  payment: {
+  pagamento: {
     id: number
     status: string
   } | null

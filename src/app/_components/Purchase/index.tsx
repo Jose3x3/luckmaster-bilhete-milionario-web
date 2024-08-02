@@ -15,6 +15,7 @@ import { toast } from 'react-toastify'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { useCookies } from 'react-cookie'
 import { LoginModal } from '@/components/LoginModal'
+import Loading from '@/components/Loading'
 
 interface PurchaseProps {
   campaign: Rifa
@@ -37,7 +38,14 @@ export function Purchase({
   const router = useRouter()
   const searchParams = useSearchParams()
   const [openLoginModal, setOpenLoginModal] = useState(false)
-  const [cookies, setCookies] = useCookies(['pix', 'txId', 'value', 'token'])
+  const [cookies, setCookies] = useCookies([
+    'pix',
+    'txId',
+    'value',
+    'token',
+    'userid',
+  ])
+  const [loading, setLoading] = useState(false)
 
   const createQueryString = useCallback(
     (name: string, value: string) => {
@@ -214,20 +222,24 @@ export function Purchase({
                 setOpenLoginModal(true)
                 return
               }
-              await handlePurchase({
-                quantidade_numeros: qtd,
-                shared_id: sharedCampaignId,
-                sorteio_id: '0111de6e-b225-4d13-a906-a523afbff5cc',
-                user_id: '01651fe4-d6f1-48a2-9469-ee49ad67e3ea',
-                valor: value * qtd,
-              })
+              setLoading(true)
+              if (cookies.userid)
+                await handlePurchase({
+                  quantidade_numeros: qtd,
+                  shared_id: sharedCampaignId,
+                  sorteio_id: '0111de6e-b225-4d13-a906-a523afbff5cc',
+                  user_id: cookies.userid,
+                  valor: value * qtd,
+                })
               setOpenPurchase(false)
+              setLoading(false)
             }}
             label="Confirmar"
           />
         </div>
       </Modal>
       <LoginModal open={openLoginModal} setOpen={setOpenLoginModal} />
+      <Loading open={loading} />
     </div>
   )
 }
