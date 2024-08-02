@@ -5,11 +5,20 @@ import { Promotion } from '@/types/Promotion'
 interface PurchaseProps {
   campaign: Rifa
   promotion: Promotion
+  sharedCampaignId: string
 }
-export function SuspensePurchase({ campaign, promotion }: PurchaseProps) {
+export function SuspensePurchase({
+  campaign,
+  promotion,
+  sharedCampaignId,
+}: PurchaseProps) {
   return (
     <Suspense>
-      <Purchase campaign={campaign} promotion={promotion} />
+      <Purchase
+        campaign={campaign}
+        promotion={promotion}
+        sharedCampaignId={sharedCampaignId}
+      />
     </Suspense>
   )
 }

@@ -8,11 +8,15 @@ import { WinnerResponse } from '@/types/WinnerResponse'
 import { AwardWithWinner } from '@/types/AwardWithWinner'
 import { SuspensePurchase } from '@/app/_components/SuspensePurchase'
 
-export default async function Home() {
+export default async function Home({
+  searchParams,
+}: {
+  searchParams: { [key: string]: string | string[] | undefined }
+}) {
   const [campaignReponse, awardResponse, awardWinnersResponse] =
     await Promise.all([
       api.get<CampaignResponse>(
-        '/user/find/sharedcampaign/94e57731-e792-4ca2-a74c-31381d1e7dec',
+        `/user/find/sharedcampaign/${searchParams.sharedcampaignId}`,
       ),
       api.get<AwardResponse>(
         `/rifa/award/force/list/0111de6e-b225-4d13-a906-a523afbff5cc/1/1000?isAdminPanel=false`,
@@ -49,6 +53,7 @@ export default async function Home() {
         <SuspensePurchase
           campaign={campaignReponse.data.rifa}
           promotion={campaignReponse.data.promotions[0]}
+          sharedCampaignId={searchParams.sharedcampaignId as string}
         />
         <Description rifa={campaignReponse.data.rifa} />
         <Awards awards={awardWithWinners} />
