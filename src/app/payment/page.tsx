@@ -5,6 +5,7 @@ import { Timer } from '@/app/payment/_components/Timer'
 import { Pix } from '@/app/payment/_components/Pix'
 import { cookies } from 'next/headers'
 import { CopyAndPastePix } from '@/app/payment/_components/CopyAndPastePix'
+import { Title } from '@/app/payment/_components/Title'
 
 export default async function Payment({
   searchParams,
@@ -29,11 +30,7 @@ export default async function Payment({
     <main className="text-gray-900 flex flex-col items-center gap-4 p-2 md:p-10">
       <div className="max-w-[550px] w-full">
         <div className="bg-white shadow w-full gap-2 flex flex-col items-center justify-center rounded-t-2xl sm:p-2 md:p-3 ">
-          <div className="text-xl text-center">
-            <h1>Aguardando Pagamento</h1>
-            <h2 className="font-bold">Não perca tempo!</h2>
-          </div>
-
+          <Title pix={pix} />
           <Image
             className="rounded-2xl w-full h-auto p-2 md:p-0"
             src={campaignReponse.data.rifa.imagem}
@@ -47,7 +44,13 @@ export default async function Payment({
             <>
               <Timer date={generatedDate} txId={txId} token={token} />
               <Pix pix={pix} />
-              {value && <CopyAndPastePix pix={pix} value={Number(value)} />}
+              {value && (
+                <CopyAndPastePix
+                  pix={pix}
+                  value={Number(value)}
+                  token={token}
+                />
+              )}
             </>
           )}
         </div>

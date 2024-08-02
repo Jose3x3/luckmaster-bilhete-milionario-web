@@ -19,6 +19,7 @@ export default function Navbar({ campaign }: NavbarProps) {
   }
 
   const signOut = () => {
+    localStorage.removeItem('@Code:JWT_TOKEN')
     removeCookie('token')
   }
   return (
