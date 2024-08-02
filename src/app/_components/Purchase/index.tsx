@@ -19,9 +19,14 @@ import { LoginModal } from '@/components/LoginModal'
 interface PurchaseProps {
   campaign: Rifa
   promotion: Promotion
+  sharedCampaignId: string
 }
 
-export function Purchase({ campaign, promotion }: PurchaseProps) {
+export function Purchase({
+  campaign,
+  promotion,
+  sharedCampaignId,
+}: PurchaseProps) {
   const oldValue = campaign.preco_por_numero
   const promoValue = promotion.valor / promotion.quantidade
   const minQtd = campaign.qntd_min
@@ -211,7 +216,7 @@ export function Purchase({ campaign, promotion }: PurchaseProps) {
               }
               await handlePurchase({
                 quantidade_numeros: qtd,
-                shared_id: 'f1841e33-42c0-46ed-8e4c-078517cc0c26',
+                shared_id: sharedCampaignId,
                 sorteio_id: '0111de6e-b225-4d13-a906-a523afbff5cc',
                 user_id: '01651fe4-d6f1-48a2-9469-ee49ad67e3ea',
                 valor: value * qtd,
