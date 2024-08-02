@@ -12,7 +12,6 @@ interface CopyAndPastePixProps {
   token: string
 }
 
-
 export function CopyAndPastePix({ pix, value }: CopyAndPastePixProps) {
   const { status } = usePayment()
   const router = useRouter()
