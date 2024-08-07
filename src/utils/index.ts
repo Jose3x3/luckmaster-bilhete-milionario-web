@@ -23,3 +23,17 @@ export const parseJwt = (token: string): User => {
   const jsonPayload = Buffer.from(base64, 'base64').toString('utf-8')
   return JSON.parse(jsonPayload) as User
 }
+
+export const fetchWithBaseUrl = (
+  endpoint: string,
+  options?: RequestInit,
+): Promise<Response> => {
+  const url = `https://app-rifas-df3f6ixkga-uc.a.run.app/api${endpoint}`
+  return fetch(url, {
+    ...options,
+    headers: {
+      'Content-Type': 'application/json',
+      ...options?.headers,
+    },
+  })
+}

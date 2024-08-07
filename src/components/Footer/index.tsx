@@ -2,7 +2,6 @@ import { Rifa } from '@/types/Rifa'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faWhatsapp, faInstagram } from '@fortawesome/free-brands-svg-icons'
 import { Button } from '@/components/Button'
-import Image from 'next/image'
 
 interface FooterProps {
   campaign: Rifa
@@ -51,14 +50,6 @@ export function Footer({ campaign }: FooterProps) {
             />
           </a>
         </div>
-        <Image
-          src={campaign.logo}
-          className="w-24 h-auto"
-          alt="Bilhete Milionário Logo"
-          width={1920}
-          height={1080}
-          priority
-        />
 
         <div className="flex gap-2 text-white">
           <span>Termos de uso</span>
