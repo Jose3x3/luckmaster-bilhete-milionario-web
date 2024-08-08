@@ -21,9 +21,10 @@ const registerFormSchema = z.object({
     .string({ required_error: 'Campo obrigatório' })
     .min(1, { message: 'Campo obrigatório' }),
   email: z
-    .string({ required_error: 'Campo obrigatório' })
-    .min(1, { message: 'Campo obrigatório' })
-    .email({ message: 'Email inválido' }),
+    .string()
+    .email({ message: 'Email inválido' })
+    .optional()
+    .or(z.literal('')),
   cpf: z.string().refine((value) => cpfValidator.isValid(value), {
     message: 'CPF Inválido',
   }),
@@ -134,7 +135,6 @@ export function LoginModal({ open, setOpen }: LoginModalProps) {
               label="Email"
               type="email"
               placeholder="Digite seu email"
-              required
               errorMessage={errors.email?.message}
               register={register('email')}
             />
