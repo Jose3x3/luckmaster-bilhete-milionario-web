@@ -1,12 +1,14 @@
 'use client'
 import { AwardWithWinner } from '@/types/AwardWithWinner'
 import { AwardsList } from '../AwardsList'
-import { Award } from '@/types/Award'
 import { Label } from '@/components/Label'
 import { useEffect, useState } from 'react'
 import { api } from '@/api'
 import { AwardResponse } from '@/types/AwardResponse'
 import { WinnerResponse } from '@/types/WinnerResponse'
+import { availableAwards } from '@/app/_components/Awards/availableAwards'
+
+const awardsNames = ['Silva', 'Robson', 'Micheline', 'Josafa', 'Elias']
 
 export function Awards() {
   const [awards, setAwards] = useState<AwardWithWinner[]>([])
@@ -36,11 +38,9 @@ export function Awards() {
   }, [])
 
   useEffect(() => {}, [])
-  const availableAwards: Award[] = awards.filter(
-    (award) => award.name === undefined,
-  )
   const winnersAwards: AwardWithWinner[] = awards.filter(
-    (award) => award.name !== undefined,
+    (award) =>
+      award.name !== undefined && awardsNames.includes(award.name.trim()),
   )
   return (
     <>
